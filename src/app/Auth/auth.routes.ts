@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { Login } from './login/login';
-import { Register } from './register/register';
+import { Registro } from './registro/registro';
+import { EmailVerificacion } from './email-verificacion/email-verificacion';
 
 export const AUTH_ROUTES: Routes = [
 
-    {path: 'login', component: Login},
-    {path: 'register', component: Register}
+    {path: 'Login', component: Login},
+    {path: 'Registro', component: Registro},
+    {path: 'EmailVerificacion', component: EmailVerificacion}
 ]
 

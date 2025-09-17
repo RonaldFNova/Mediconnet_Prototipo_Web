@@ -1,6 +1,10 @@
 export interface RegistroPost {
-  nombre: string;
-  apellido: string;
-  email: string;
-  password: string;
+  Nombre: string;
+  Apellido: string;
+  Email: string;
+  Password: string;
+}
+
+export interface RegistroPostResponse {
+  token: string;
 }

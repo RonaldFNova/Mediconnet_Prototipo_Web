@@ -8,7 +8,7 @@ import { RegistroPost } from '../Model/registro,interface.js';
 })
 export class RegistroService {
 
-  private apiUrl = '';
+  private apiUrl = 'http://localhost:5000/Api/Usuario';
 
   constructor(private http: HttpClient) { }
 
