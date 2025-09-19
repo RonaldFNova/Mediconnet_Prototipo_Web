@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { RegistroService } from '../../Core/Service/registro.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TokenService } from '../../Core/Service/token.service';
+import { sendEmailService } from '../../Core/Service/sendEmail.service';
 
 
 @Component({
@@ -15,7 +17,8 @@ export class Registro {
   registerForm: FormGroup;
   mensaje: string = '';
 
-  constructor(private fb: FormBuilder, private registroService: RegistroService, private router: Router) {
+  constructor(private fb: FormBuilder, private registroService: RegistroService, 
+    private router: Router, private tokenService: TokenService, private sendEmailService: sendEmailService) {
     this.registerForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -30,6 +33,17 @@ export class Registro {
 
         next: (response) => {
           this.mensaje = 'Registro exitoso. Por favor, inicie sesión.';
+          this.tokenService.setToken(response.token); 
+                   
+          this.sendEmailService.sendEmailCode(response.token).subscribe({
+          next: (res) => {
+            console.log(res);
+          },
+          error: (err) => {
+            console.error(err);
+          }
+        });
+
           this.router.navigate(['Auth/EmailVerificacion']);
         }
 

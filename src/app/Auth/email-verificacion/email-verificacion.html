@@ -1,6 +1,6 @@
-<form>
+<form [formGroup]="emailVerificacion" (ngSubmit)="onSubmit()">
   <label for="codigo">Código de verificación:</label>
-  <input id="codigo" name="codigo" type="text" required />
+  <input id="codigo" formControlName="codigo" name="codigo" type="text" required />
 
   <button type="submit">Verificar</button>
 </form>
