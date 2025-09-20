@@ -7,7 +7,7 @@ import { CodeSend } from '../Model/code.interface';
 })
 export class sendEmailService {
 
-  private apiUrl = 'http://localhost:5000/Api/EmailCode';
+  private apiUrl = 'http://localhost:5000/Api/EmailCode/Verificar';
 
   constructor(private http: HttpClient) { }
  

@@ -37,6 +37,7 @@ export class Registro {
                    
           this.sendEmailService.sendEmailCode(response.token).subscribe({
           next: (res) => {
+            
             console.log(res);
           },
           error: (err) => {

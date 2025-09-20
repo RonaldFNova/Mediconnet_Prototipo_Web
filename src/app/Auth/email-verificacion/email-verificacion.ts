@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TokenService } from '../../Core/Service/token.service';
 import { sendEmailService } from '../../Core/Service/sendEmail.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 
 
 @Component({
@@ -13,8 +14,9 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 export class EmailVerificacion {
 
   emailVerificacion: FormGroup;
+  mensaje: string = "";
 
-  constructor(private tokenService: TokenService, private sendEmail: sendEmailService, private fb: FormBuilder ) {
+  constructor(private tokenService: TokenService, private sendEmail: sendEmailService, private fb: FormBuilder, private router: Router) {
     this.emailVerificacion = this.fb.group({
       codigo: ['', Validators.required]
     });
@@ -23,10 +25,24 @@ export class EmailVerificacion {
 
   onSubmit()
   {
+    if (this.emailVerificacion.valid){
 
+      this.sendEmail.sendCode(this.tokenService.getToken(),this.emailVerificacion.value).subscribe({
+
+        next: (Response) => {
+          
+          console.log(Response);
+          this.mensaje = "Email verificado correctamente"
+          this.router.navigate(['Auth/Login']);
+        },
+
+        error: (Response) => {
+          this.mensaje = "Error en enviar el codigo"
+        }
+
+      })
+
+    }
   }
-
-
-  
 
 }
