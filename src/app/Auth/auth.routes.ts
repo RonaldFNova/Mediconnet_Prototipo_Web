@@ -8,5 +8,6 @@ export const AUTH_ROUTES: Routes = [
     {path: 'Login', component: Login},
     {path: 'Registro', component: Registro},
     {path: 'EmailVerificacion', component: EmailVerificacion}
+
 ]
 

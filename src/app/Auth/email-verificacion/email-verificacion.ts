@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TokenService } from '../../Core/Service/token.service';
-import { sendEmailService } from '../../Core/Service/sendEmail.service';
+import { SendEmailService } from '../../Core/Service/sendEmail.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 
@@ -16,7 +16,7 @@ export class EmailVerificacion {
   emailVerificacion: FormGroup;
   mensaje: string = "";
 
-  constructor(private tokenService: TokenService, private sendEmail: sendEmailService, private fb: FormBuilder, private router: Router) {
+  constructor(private tokenService: TokenService, private sendEmail: SendEmailService, private fb: FormBuilder, private router: Router) {
     this.emailVerificacion = this.fb.group({
       codigo: ['', Validators.required]
     });

@@ -4,7 +4,7 @@ import { RegistroService } from '../../Core/Service/registro.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TokenService } from '../../Core/Service/token.service';
-import { sendEmailService } from '../../Core/Service/sendEmail.service';
+import { SendEmailService } from '../../Core/Service/sendEmail.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class Registro {
   mensaje: string = '';
 
   constructor(private fb: FormBuilder, private registroService: RegistroService, 
-    private router: Router, private tokenService: TokenService, private sendEmailService: sendEmailService) {
+    private router: Router, private tokenService: TokenService, private sendEmailService: SendEmailService) {
     this.registerForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
