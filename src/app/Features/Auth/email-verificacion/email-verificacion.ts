@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { TokenService } from '../../Core/Service/token.service';
-import { SendEmailService } from '../../Core/Service/sendEmail.service';
+import { SendEmailService } from '../../../Core/Service/sendEmail.service';
+import { TokenService } from '../../../Core/Service/token.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({

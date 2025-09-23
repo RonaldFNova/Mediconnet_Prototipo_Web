@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RegistroService } from '../../Core/Service/registro.service';
+import { RegistroService } from '../../../Core/Service/registro.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TokenService } from '../../Core/Service/token.service';
-import { SendEmailService } from '../../Core/Service/sendEmail.service';
+import { TokenService } from '../../../Core/Service/token.service';
+import { SendEmailService } from '../../../Core/Service/sendEmail.service';
 
 
 @Component({

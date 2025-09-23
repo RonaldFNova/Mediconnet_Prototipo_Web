@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { LoginService } from '../../Core/Service/login.service';
-import { TokenService } from '../../Core/Service/token.service';
+import { LoginService } from '../../../Core/Service/login.service';
+import { TokenService } from '../../../Core/Service/token.service';
 import { Router } from '@angular/router';
 
 @Component({
