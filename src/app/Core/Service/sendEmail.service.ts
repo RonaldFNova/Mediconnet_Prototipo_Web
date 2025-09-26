@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CodeSend } from '../Model/code.interface';
-import { LoginPost2 } from '../Model/login.interface';
+import { codeRequest } from '../Model/codeRequest.interface';
+import { emailCodeRequest } from '../Model/emailCodeRequest.interface';
 
 @Injectable({  providedIn: 'root'
 })
@@ -11,22 +11,16 @@ export class SendEmailService {
   private apiUrl1 = 'http://localhost:5000/Api/EmailCode';
   private apiUrl2 = 'http://localhost:5000/Api/EmailCode/Verificar';
   private apiUrl3 = 'http://localhost:5000/Api/EmailCode/Email';
+  private apiUrl4 = 'http://localhost:5000/Api/EmailCode/Verificar/Email';
 
   constructor(private http: HttpClient) { }
  
-  sendEmailCode(token: string): Observable<any> {
-    const headers = {'Authorization': `Bearer ${token}` };
-    console.log("Llamando a:", this.apiUrl1, "con headers:", headers);
-    return this.http.post<any>(this.apiUrl1, {}, {headers});
+  sendCode(verificacion: codeRequest): Observable<any> {
+    return this.http.post<any>(this.apiUrl4, verificacion);
   }
 
-  sendCode(token: string, code: CodeSend): Observable<any> {
-    const headers = { 'Authorization': `Bearer ${token}` };
-    return this.http.post<any>(this.apiUrl2, code, { headers });
-  }
-
-  sendEmailCode2(LoginPost: LoginPost2): Observable<any>{
-    console.log(this.http.post<any>(this.apiUrl3, LoginPost));
+  sendEmailCode(LoginPost: emailCodeRequest): Observable<any>{
+    console.log(this.http.post<any>(this.apiUrl3, LoginPost, { headers: { 'Content-Type': 'application/json' }} ));
     return this.http.post<any>(this.apiUrl3, LoginPost);
   }
 

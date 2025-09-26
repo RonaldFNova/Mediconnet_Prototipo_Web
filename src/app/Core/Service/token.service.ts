@@ -20,4 +20,14 @@ export class TokenService {
         return this.cookieService.get("authToken")
     }
 
+    setEmail(email: string) {
+        console.log(email);
+        this.cookieService.set('Email', email, {
+            expires: 14,       // expira en 1 día
+            path: '/',        // accesible en toda la app
+            secure: true,     // solo en HTTPS
+            sameSite: 'Strict'
+        }); 
+    }
+
 }

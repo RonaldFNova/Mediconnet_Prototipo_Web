@@ -47,11 +47,11 @@ export class Login {
           }
         })
 
-        this.sendEmailService.sendEmailCode2({ Email: this.loginForm.value.email}).subscribe({
+        this.sendEmailService.sendEmailCode({ Email: this.loginForm.value.email}).subscribe({
 
           next: (response) => {
 
-            this.sendEmailService.sendEmailCode2(this.loginForm.value.email);
+            this.sendEmailService.sendEmailCode(this.loginForm.value.email);
             this.router.navigate(['/Auth/EmailVerificacion'])
               
           },

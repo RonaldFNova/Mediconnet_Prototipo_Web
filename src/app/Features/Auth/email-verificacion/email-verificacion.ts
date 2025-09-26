@@ -27,7 +27,7 @@ export class EmailVerificacion {
   {
     if (this.emailVerificacion.valid){
 
-      this.sendEmail.sendCode(this.tokenService.getToken(),this.emailVerificacion.value).subscribe({
+      this.sendEmail.sendCode(this.emailVerificacion.value).subscribe({
 
         next: (Response) => {
           
@@ -39,6 +39,8 @@ export class EmailVerificacion {
         error: (Response) => {
           this.mensaje = "Error en enviar el codigo"
         }
+
+
 
       })
 
