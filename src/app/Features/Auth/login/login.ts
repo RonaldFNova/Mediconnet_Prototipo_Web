@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../../../Core/Service/login.service';
-import { TokenService } from '../../../Core/Service/token.service';
+import { cookieService } from '../../../Core/Service/cooke.service';
 import { Router } from '@angular/router';
 import { SendEmailService } from '../../../Core/Service/sendEmail.service';
 
@@ -18,8 +18,11 @@ export class Login {
     mensaje: string = '';
     public verificacionEmail?: boolean;
 
-    constructor(private fb: FormBuilder, private loginService: LoginService,
-       private router: Router,private tokenService: TokenService, private sendEmailService: SendEmailService) {
+    constructor(private fb: FormBuilder, 
+      private loginService: LoginService,
+       private router: Router,
+       private cookieService: cookieService, 
+       private sendEmailService: SendEmailService) {
 
       this.loginForm = this.fb.group({
         email: ['', [Validators.required,Validators.email]],
@@ -28,40 +31,33 @@ export class Login {
     }
 
     onSubmit(){
-      if (this.loginForm.valid) {
-        this.loginService.loginUsuario(this.loginForm.value).subscribe({
 
-          next: (response) => {
-
-            this.mensaje = response.mensaje;
-            this.verificacionEmail = response.verificacionEmail;
-
-            if (this.verificacionEmail) {
-                this.tokenService.setToken(response.token)
-                this.router.navigate(['/home']);
-              }
-          },
-          error: (error) => {
-            console.log(error.status);
-            this.mensaje = error.error.mensaje;
-          }
-        })
-
-        this.sendEmailService.sendEmailCode({ Email: this.loginForm.value.email}).subscribe({
-
-          next: (response) => {
-
-            this.sendEmailService.sendEmailCode(this.loginForm.value.email);
-            this.router.navigate(['/Auth/EmailVerificacion'])
-              
-          },
-          error: (error) => {
-              console.log(error.status);
-              this.mensaje = error.error.mensaje;
-          }
-
-        })
+      if (!this.loginForm.valid) {
+        this.mensaje = "Por favor complete el formulario";
+        return;
       }
-    }
 
+      this.loginService.loginUsuario(this.loginForm.value).subscribe({
+        next: (respuesta) => {
+          if (respuesta.verificacionEmail) {
+            this.cookieService.setToken(respuesta.token);
+            this.cookieService.deleteEmail();
+            this.router.navigate(['Home']);
+          } else {
+            this.sendEmailService.sendEmailCode({ Email: this.loginForm.value.email }).subscribe({
+              next: () => {
+                this.cookieService.setEmail(this.loginForm.value.email);
+                this.router.navigate(['Auth/EmailVerificacion']);
+              },
+              error: () => {
+                this.mensaje = "Error al enviar el código de verificación.";
+              }
+            });
+          }
+        },
+        error: (error) => {
+          this.mensaje = error.error?.mensaje || "Error en el login";
+        }
+      });
+    }
 }

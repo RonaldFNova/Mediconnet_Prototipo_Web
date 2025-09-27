@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SendEmailService } from '../../../Core/Service/sendEmail.service';
-import { TokenService } from '../../../Core/Service/token.service';
+import { cookieService } from '../../../Core/Service/cooke.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -16,35 +16,51 @@ export class EmailVerificacion {
   emailVerificacion: FormGroup;
   mensaje: string = "";
 
-  constructor(private tokenService: TokenService, private sendEmail: SendEmailService, private fb: FormBuilder, private router: Router) {
+  constructor(private cookieService: cookieService, 
+    private sendEmailService: SendEmailService, 
+    private fb: FormBuilder, 
+    private router: Router) {
     this.emailVerificacion = this.fb.group({
       codigo: ['', Validators.required]
     });
-
   }
 
   onSubmit()
   {
     if (this.emailVerificacion.valid){
-
-      this.sendEmail.sendCode(this.emailVerificacion.value).subscribe({
+      this.sendEmailService.sendVerificarCode({Email: this.cookieService.getEmail(), Codigo: this.emailVerificacion.value.codigo}).subscribe({
 
         next: (Response) => {
-          
-          console.log(Response);
-          this.mensaje = "Email verificado correctamente"
-          this.router.navigate(['Auth/Login']);
+          this.mensaje = Response.mensaje;
+          this.cookieService.setToken(Response.token);
+          this.cookieService.deleteEmail();
+          this.router.navigate(['Home/Home']);
         },
-
-        error: (Response) => {
-          this.mensaje = "Error en enviar el codigo"
+        error: (error) => {
+          console.log(error)
+          this.mensaje = error.error.mensaje;
         }
-
-
-
       })
+    }
+    else{
+
+      this.mensaje = "Por favor, complete el formulario correctamente."
 
     }
+  }
+
+  reenviarCodigo(){
+    this.sendEmailService.sendEmailCode({Email: this.cookieService.getEmail()}).subscribe({
+
+      next: (Response) => {
+        this.mensaje = "Codigo reenviado correctamente"
+      },
+      error: (error) =>{
+
+        this.mensaje = "Error tendras que logearte de nuevo para poder verificarte"
+      }  
+    })
+
   }
 
 }

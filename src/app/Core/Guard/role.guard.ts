@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, Router } from "@angular/router";
-import { TokenService } from "../Service/token.service";
+import { cookieService } from "../Service/cooke.service";
 import { jwtDecode } from 'jwt-decode';
-import { JwtPayload } from '../Model/payload.interface'; 
 
 
 
@@ -12,11 +11,11 @@ import { JwtPayload } from '../Model/payload.interface';
 
 export class RoleGuard implements CanActivate {
 
-    constructor(private tokenService: TokenService, private router: Router) {}
+    constructor(private cookieService: cookieService, private router: Router) {}
 
     canActivate(route: any): boolean {
         const expectedRoles: string[] = route.data['roles'];
-        const token = this.tokenService.getToken();
+        const token = this.cookieService.getToken();
 
         if (!token) {
             this.router.navigate(['/Auth/Login']);
@@ -24,8 +23,9 @@ export class RoleGuard implements CanActivate {
         }
 
         try {
-            const decoded = jwtDecode<JwtPayload>(token);
-            const userRole = decoded.role;
+            const decoded = jwtDecode<any>(token);
+            const userRole = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+            console.log(decoded);
 
             if (expectedRoles.includes(userRole)) {
                 return true;

@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TokenService } from '../../../Core/Service/token.service';
+import { cookieService } from '../../../Core/Service/cooke.service';
 import { SendEmailService } from '../../../Core/Service/sendEmail.service';
 import { registrarUsuarioService } from '../../../Core/Service/registrarUsuario.service'; 
-import { catchError, switchMap, take, tap } from 'rxjs';
-import { of } from 'rxjs';
+import { catchError, switchMap, tap, of } from 'rxjs';
 
 @Component({
   selector: 'app-registro',
@@ -23,7 +22,7 @@ export class Registro {
     private registrarUsuarioService: registrarUsuarioService, 
     private router: Router, 
     private sendEmailService: SendEmailService, 
-    private tokenService: TokenService) 
+    private cookieService: cookieService) 
     {
       this.registerForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -53,12 +52,11 @@ export class Registro {
       ).subscribe({
         next: (res) => {
           if (res?.emailsend === false) {
-            this.mensaje = "El correo no se pudo enviar, pero el usuario está registrado Iniciee."
+            this.mensaje = "Error el correo no se pudo enviar."
             this.router.navigate(['Auth/Login']);
-
           }
 
-          this.tokenService.setEmail(this.registerForm.value.email);
+          this.cookieService.setEmail(this.registerForm.value.email);
           this.router.navigate(['Auth/EmailVerificacion']);
 
         },
@@ -70,7 +68,5 @@ export class Registro {
     else {
       this.mensaje = 'Por favor, complete el formulario correctamente.';
     }
-    
   }
-
 }

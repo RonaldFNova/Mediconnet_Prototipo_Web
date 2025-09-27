@@ -3,7 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({  providedIn: 'root'})
 
-export class TokenService {  
+export class cookieService {  
 
     constructor(private cookieService: CookieService) {}
 
@@ -17,7 +17,7 @@ export class TokenService {
     }
 
     getToken(): string{
-        return this.cookieService.get("authToken")
+        return this.cookieService.get("authToken");
     }
 
     setEmail(email: string) {
@@ -28,6 +28,14 @@ export class TokenService {
             secure: true,     // solo en HTTPS
             sameSite: 'Strict'
         }); 
+    }
+
+    getEmail(): string {
+        return this.cookieService.get("Email");
+    }
+
+    deleteEmail() {
+        this.cookieService.delete('Email', '/', 'localhost');     
     }
 
 }
