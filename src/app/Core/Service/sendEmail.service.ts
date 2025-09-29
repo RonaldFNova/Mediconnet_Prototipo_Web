@@ -10,6 +10,7 @@ export class SendEmailService {
 
   private apiUrl1 = 'http://localhost:5000/Api/EmailCode/Verificar/Email';
   private apiUrl2 = 'http://localhost:5000/Api/EmailCode/Email';
+  private apiUrl3 = 'http://localhost:5000/Api/EmailCode/Forgot-Password'
 
   constructor(private http: HttpClient) { }
 
@@ -20,6 +21,10 @@ export class SendEmailService {
 
   sendEmailCode(emailCode: emailCodeRequest): Observable<any>{
     return this.http.post<any>(this.apiUrl2, emailCode);
+  }
+
+  sendEmailForgotPassword(sendEmail: emailCodeRequest): Observable<any>{
+    return this.http.post<any>(this.apiUrl3, sendEmail);
   }
 
 }

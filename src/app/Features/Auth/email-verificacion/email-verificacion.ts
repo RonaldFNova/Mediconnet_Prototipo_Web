@@ -34,7 +34,7 @@ export class EmailVerificacion {
           this.mensaje = Response.mensaje;
           this.cookieService.setToken(Response.token);
           this.cookieService.deleteEmail();
-          this.router.navigate(['Home/Home']);
+          this.router.navigate(['Home']);
         },
         error: (error) => {
           console.log(error)
@@ -56,10 +56,10 @@ export class EmailVerificacion {
         this.mensaje = "Codigo reenviado correctamente"
       },
       error: (error) =>{
-
         this.mensaje = "Error tendras que logearte de nuevo para poder verificarte"
-      }  
-    })
+      }
+        
+    });
 
   }
 

@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Registro } from './registro/registro';
 import { Login } from './login/login';
 import { AUTH_ROUTES } from './auth.routes';
+import { ForgotPassword } from './forgot-password/forgot-password';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { AUTH_ROUTES } from './auth.routes';
     ReactiveFormsModule,
     Registro,
     Login,
+    ForgotPassword,
     RouterModule.forChild(AUTH_ROUTES)
   ]
 })
