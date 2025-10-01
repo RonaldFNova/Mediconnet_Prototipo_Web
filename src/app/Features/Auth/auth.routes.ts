@@ -3,12 +3,14 @@ import { Login } from './login/login';
 import { Registro } from './registro/registro';
 import { EmailVerificacion } from './email-verificacion/email-verificacion';
 import { ForgotPassword } from './forgot-password/forgot-password';
+import { ResetPassword } from './reset-password/reset-password';
 
 export const AUTH_ROUTES: Routes = [
 
     {path: 'Login', component: Login},
     {path: 'Registro', component: Registro},
     {path: 'EmailVerificacion', component: EmailVerificacion},
-    {path: 'Forgot-Password', component: ForgotPassword}
+    {path: 'Forgot-Password', component: ForgotPassword},
+    {path: 'Reset-Password', component: ResetPassword}
 ]
 

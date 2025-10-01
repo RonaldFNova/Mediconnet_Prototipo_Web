@@ -6,6 +6,7 @@ import { Registro } from './registro/registro';
 import { Login } from './login/login';
 import { AUTH_ROUTES } from './auth.routes';
 import { ForgotPassword } from './forgot-password/forgot-password';
+import { ResetPassword } from './reset-password/reset-password';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { ForgotPassword } from './forgot-password/forgot-password';
     Registro,
     Login,
     ForgotPassword,
+    ResetPassword,
     RouterModule.forChild(AUTH_ROUTES)
   ]
 })
