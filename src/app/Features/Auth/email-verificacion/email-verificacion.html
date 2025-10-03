@@ -1,10 +1,22 @@
-<form [formGroup]="emailVerificacion" (ngSubmit)="onSubmit()">
-  <label for="codigo">Código de verificación:</label>
-  <input id="codigo" formControlName="codigo" name="codigo" type="text" required />
+<form [formGroup]="emailVerificacion" (ngSubmit)="onSubmit()" class="card flex justify-center">
+    <div class="flex flex-col items-center">
+        <div class="font-bold text-xl mb-2"> Auntentica tu correo eletronico</div>
+        <p class="text-muted-color block mb-8">Porfavor ingrese el codigo que le llegara al email.</p>
+        <p-inputotp [length]="6"  formControlName="codigo">
+        </p-inputotp>
+<div class="min-h-[32px]  justify-center">
+  <p-message
+    severity="mensajeTipo"
+    variant="simple"
+    size="small"
+  >
+    {{ mensaje }}
+  </p-message>
+</div>
 
-  <button type="submit">Verificar</button>
-
-  <button type="button" (click)="reenviarCodigo()">Reenviar código</button>
-
-  <p>{{ mensaje }}</p>
+        <div class="flex justify-between mt-8 self-stretch">
+            <p-button label="Reenviar código" [link]="true" (click)="reenviarCodigo()" class="p-0"/>
+            <p-button label="Verificar" type="submit"/>
+        </div>
+    </div>
 </form>

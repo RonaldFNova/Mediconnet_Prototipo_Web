@@ -3,16 +3,25 @@ import { SendEmailService } from '../../../Core/Service/sendEmail.service';
 import { cookieService } from '../../../Core/Service/cooke.service';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
+import { InputOtpModule } from 'primeng/inputotp';
+import { ButtonModule } from 'primeng/button';
+import { Message } from 'primeng/message';
 
 @Component({
   selector: 'app-email-verificacion',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,
+    FormsModule,
+    InputOtpModule,
+    ButtonModule,
+    Message
+  ],
   templateUrl: './email-verificacion.html',
   styleUrl: './email-verificacion.css'
 })
 export class EmailVerificacion {
 
+  mensajeTipo: string = ""; 
   emailVerificacion: FormGroup;
   mensaje: string = "";
 
@@ -43,7 +52,7 @@ export class EmailVerificacion {
       })
     }
     else{
-
+      this.mensajeTipo = "warn"
       this.mensaje = "Por favor, complete el formulario correctamente."
 
     }

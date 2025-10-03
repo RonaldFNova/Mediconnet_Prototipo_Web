@@ -9,7 +9,7 @@ import { emailCodeRequest } from '../Model/emailCodeRequest.interface';
 export class SendEmailService {
 
   private apiUrl1 = 'http://localhost:5000/Api/EmailCode/Verificar/Email';
-  private apiUrl2 = 'http://localhost:5000/Api/EmailCode/Email';
+  private apiUrl2 = 'http://localhost:5000/Api/EmailVerificacion/Enviar';
 
   constructor(private http: HttpClient) { }
 
