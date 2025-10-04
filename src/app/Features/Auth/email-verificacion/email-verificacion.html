@@ -1,22 +1,55 @@
-<form [formGroup]="emailVerificacion" (ngSubmit)="onSubmit()" class="card flex justify-center">
+<div class="flex justify-center items-center min-h-screen bg-gray-50">
+  <div class="bg-white rounded-2xl shadow-md p-8 w-full max-w-md">
     <div class="flex flex-col items-center">
-        <div class="font-bold text-xl mb-2"> Auntentica tu correo eletronico</div>
-        <p class="text-muted-color block mb-8">Porfavor ingrese el codigo que le llegara al email.</p>
-        <p-inputotp [length]="6"  formControlName="codigo">
-        </p-inputotp>
-<div class="min-h-[32px]  justify-center">
-  <p-message
-    severity="mensajeTipo"
-    variant="simple"
-    size="small"
-  >
-    {{ mensaje }}
-  </p-message>
-</div>
+      <div class="font-bold text-xl mb-2">Autentica tu correo electrónico</div>
+      <p class="text-gray-500 text-center mb-6">
+        Por favor ingrese el código que le llegó al email.
+      </p>
 
-        <div class="flex justify-between mt-8 self-stretch">
-            <p-button label="Reenviar código" [link]="true" (click)="reenviarCodigo()" class="p-0"/>
-            <p-button label="Verificar" type="submit"/>
+      <form [formGroup]="emailVerificacion" (ngSubmit)="onSubmit()" class="w-full">
+        <div class="flex justify-center mb-4">
+          <p-inputotp [length]="6" formControlName="codigo"></p-inputotp>
         </div>
+        
+        <div class="flex justify-center w-full mb-4 min-h-[2.5rem]">
+          @if (mensaje) {
+            <p-message
+              severity="mensajeTipo"
+              variant="simple"
+              size="small"
+              styleClass="w-full"
+            >
+              {{ mensaje }}
+            </p-message>
+          }
+        </div>
+
+        <div class="flex justify-between mt-6">
+          <p-button label="Reenviar código" [link]="true" (click)="reenviarCodigo()" class="p-0"/>
+          <p-button label="Verificar" type="submit"/>
+        </div>
+
+        <div class="text-center mt-4">
+          <p class="text-sm text-gray-600">
+            El código expira en: 
+            <span 
+              class="font-semibold"
+              [ngClass]="{
+                'text-red-600': tiempoRestante < 60,
+                'text-orange-600': tiempoRestante >= 60 && tiempoRestante < 180,
+                'text-gray-800': tiempoRestante >= 180
+              }"
+            >
+              {{ tiempoFormateado }}
+            </span>
+          </p>
+          @if (tiempoRestante <= 0) {
+            <p class="text-xs text-red-600 mt-1">
+              Código expirado
+            </p>
+          }
+        </div>
+      </form>
     </div>
-</form>
+  </div>
+</div>
