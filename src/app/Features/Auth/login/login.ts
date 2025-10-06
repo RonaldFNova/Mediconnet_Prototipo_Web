@@ -5,10 +5,19 @@ import { LoginService } from '../../../Core/Service/login.service';
 import { cookieService } from '../../../Core/Service/cooke.service';
 import { Router } from '@angular/router';
 import { SendEmailService } from '../../../Core/Service/sendEmail.service';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { Message } from 'primeng/message';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    CheckboxModule,
+    InputTextModule,
+    Message],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
@@ -26,7 +35,8 @@ export class Login {
 
       this.loginForm = this.fb.group({
         email: ['', [Validators.required,Validators.email]],
-        password: ['',Validators.required]
+        password: ['',Validators.required],
+        rememberMe: [false]
       });
     }
 
@@ -40,6 +50,11 @@ export class Login {
       this.loginService.loginUsuario(this.loginForm.value).subscribe({
         next: (respuesta) => {
           if (respuesta.verificacionEmail) {
+            /*
+            if (!this.loginForm.value.rememberMe) {
+                this.cookieService.setToken(respuesta.token);
+            }
+            */
             this.cookieService.setToken(respuesta.token);
             this.cookieService.deleteEmail();
             this.router.navigate(['Home']);
