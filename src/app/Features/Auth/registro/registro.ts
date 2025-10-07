@@ -6,10 +6,19 @@ import { cookieService } from '../../../Core/Service/cooke.service';
 import { SendEmailService } from '../../../Core/Service/sendEmail.service';
 import { registrarUsuarioService } from '../../../Core/Service/registrarUsuario.service'; 
 import { catchError, switchMap, tap, of } from 'rxjs';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { Message } from 'primeng/message'
 
 @Component({
   selector: 'app-registro',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, 
+    ReactiveFormsModule,
+    ButtonModule,
+    CheckboxModule,
+    InputTextModule,
+    Message],
   templateUrl: './registro.html',
   styleUrl: './registro.css',
 })
