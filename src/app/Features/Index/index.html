@@ -1,4 +1,256 @@
-<p>index works!</p>
+    <div class="min-h-screen bg-surface-50">
+      <!-- Header -->
+      <header class="bg-surface-0 shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <span class="text-2xl font-bold text-surface-900">MediConnet</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+              <a (click)="scrollToServicios()" class="text-surface-700 hover:text-primary cursor-pointer transition-colors">Servicios</a>
+              <a (click)="scrollToEspecialidades()" class="text-surface-700 hover:text-primary cursor-pointer transition-colors">Especialidades</a>
+              <a (click)="scrollToContacto()" class="text-surface-700 hover:text-primary cursor-pointer transition-colors">Contacto</a>
+            </div>
+            <div class="flex items-center space-x-4">
+              <button
+                routerLink="../Auth/Login"
+                class="text-surface-700 hover:text-primary font-medium transition-colors">
+                Iniciar Sesión
+              </button>
+              <button
+                routerLink="../Auth/Registro"
+                class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-emphasis transition-colors shadow-sm">
+                Registrarse
+              </button>
+            </div>
+          </div>
+        </nav>
+      </header>
 
-<button routerLink="../Auth/Registro">Registrarse</button>
-<button routerLink="../Auth/Login">Login</button>
+      <!-- Hero Section -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h1 class="text-5xl font-bold text-surface-900 leading-tight mb-6">
+              Agenda tu cita médica en segundos
+            </h1>
+            <p class="text-xl text-surface-700 mb-8">
+              Conectamos pacientes con profesionales de la salud. Agenda, gestiona y asiste a tus citas médicas de forma simple y segura.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button
+                routerLink="../Auth/Login"
+                class="bg-primary text-white px-8 py-4 rounded-lg hover:bg-primary-emphasis transition-all shadow-lg hover:shadow-xl font-semibold text-lg">
+                Agendar Cita Ahora
+              </button>
+              <button
+                (click)="scrollToEspecialidades()"
+                class="bg-surface-0 text-primary px-8 py-4 rounded-lg hover:bg-surface-50 transition-colors shadow-sm border-2 border-primary font-semibold text-lg">
+                Ver Especialidades
+              </button>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="bg-surface-0 rounded-2xl shadow-lg p-8">
+              <div class="space-y-6">
+                <div class="flex items-center space-x-4 p-4 bg-surface-50 rounded-lg">
+                  <div class="bg-primary p-3 rounded-full">
+                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                      <line x1="16" y1="2" x2="16" y2="6"/>
+                      <line x1="8" y1="2" x2="8" y2="6"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-surface-900">Selecciona fecha y hora</p>
+                    <p class="text-sm text-surface-700">Disponibilidad en tiempo real</p>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-4 p-4 bg-green-50 rounded-lg">
+                  <div class="bg-green-600 p-3 rounded-full">
+                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-surface-900">Elige tu especialista</p>
+                    <p class="text-sm text-surface-700">Perfiles verificados</p>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-4 p-4 bg-cyan-50 rounded-lg">
+                  <div class="bg-cyan-600 p-3 rounded-full">
+                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                      <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-surface-900">Confirmación inmediata</p>
+                    <p class="text-sm text-surface-700">Recordatorios automáticos</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section id="servicios" class="bg-surface-0 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-surface-900 mb-4">
+              ¿Por qué elegir MediConnet?
+            </h2>
+            <p class="text-xl text-surface-700">
+              La plataforma más confiable para gestionar tus citas médicas
+            </p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="text-center p-8 rounded-xl hover:bg-surface-50 transition-colors">
+              <div class="inline-flex items-center justify-center w-16 h-16 bg-surface-50 rounded-full mb-6">
+                <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-surface-900 mb-4">
+                Ahorra Tiempo
+              </h3>
+              <p class="text-surface-700">
+                Olvídate de las largas esperas telefónicas. Agenda tu cita en menos de 2 minutos.
+              </p>
+            </div>
+            <div class="text-center p-8 rounded-xl hover:bg-surface-50 transition-colors">
+              <div class="inline-flex items-center justify-center w-16 h-16 bg-green-50 rounded-full mb-6">
+                <svg class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-surface-900 mb-4">
+                Seguro y Confiable
+              </h3>
+              <p class="text-surface-700">
+                Tus datos médicos protegidos con los más altos estándares de seguridad.
+              </p>
+            </div>
+            <div class="text-center p-8 rounded-xl hover:bg-surface-50 transition-colors">
+              <div class="inline-flex items-center justify-center w-16 h-16 bg-cyan-50 rounded-full mb-6">
+                <svg class="h-8 w-8 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-surface-900 mb-4">
+                Profesionales Verificados
+              </h3>
+              <p class="text-surface-700">
+                Accede a una red de médicos certificados y con experiencia comprobada.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Specialties Section -->
+      <section id="especialidades" class="py-20 bg-surface-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-surface-900 mb-4">
+              Especialidades Médicas
+            </h2>
+            <p class="text-xl text-surface-700">
+              Encuentra al especialista que necesitas
+            </p>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div *ngFor="let specialty of specialties"
+                 class="bg-surface-0 p-6 rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer hover:-translate-y-1">
+              <p class="text-center font-semibold text-surface-900">{{ specialty }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="bg-primary py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 class="text-4xl font-bold text-white mb-6">
+            ¿Listo para cuidar tu salud?
+          </h2>
+          <p class="text-xl text-white opacity-90 mb-8">
+            Únete a miles de pacientes que ya confían en MediConnet
+          </p>
+          <button
+            routerLink="../Auth/Registro"
+            class="bg-surface-0 text-primary px-10 py-4 rounded-lg hover:bg-surface-50 transition-colors shadow-lg font-bold text-lg">
+            Crear Cuenta Gratuita
+          </button>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer id="contacto" class="bg-surface-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid md:grid-cols-4 gap-8">
+            <div>
+              <div class="flex items-center space-x-2 mb-4">
+                <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span class="text-xl font-bold">MediConnet</span>
+              </div>
+              <p class="text-surface-400">
+                Tu salud, nuestra prioridad
+              </p>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-4">Pacientes</h4>
+              <ul class="space-y-2 text-surface-400">
+                <li><a href="#" class="hover:text-white transition-colors">Agendar Cita</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Mis Citas</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Historial Médico</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-4">Médicos</h4>
+              <ul class="space-y-2 text-surface-400">
+                <li><a href="#" class="hover:text-white transition-colors">Registrarse</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Portal Médico</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Recursos</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-4">Contacto</h4>
+              <ul class="space-y-2 text-surface-400">
+                <li class="flex items-center space-x-2">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                  <span>+34 900 123 456</span>
+                </li>
+                <li>info&#64;MediConnet.com</li>
+              </ul>
+            </div>
+          </div>
+          <div class="border-t border-surface-700 mt-8 pt-8 text-center text-surface-400">
+            <p>&copy; 2025 MediConnet. Todos los derechos reservados.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
