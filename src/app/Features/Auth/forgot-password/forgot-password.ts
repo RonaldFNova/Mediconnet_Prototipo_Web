@@ -2,10 +2,18 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { resetPassword } from '../../../Core/Service/resetPassword.service';
 import { Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { Message } from 'primeng/message'
 
 @Component({
   selector: 'app-forgot-password',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,
+    ButtonModule,
+    CheckboxModule,
+    InputTextModule,
+    Message],
   templateUrl: './forgot-password.html',
   styleUrl: './forgot-password.css'
 })
